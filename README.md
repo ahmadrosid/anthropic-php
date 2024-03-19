@@ -2,6 +2,14 @@
 
 Anthropic PHP is library to interact with Anthropic API, this library is designed to be close to OpenAI PHP. The goal of this library is to have the same API to OpenAI PHP client, so you can switch from GPT model to Claude easily.
 
+## Installation
+
+Make sure you are using php: ^8.1.0.
+
+```bash
+composer require ahmadrosid/anthropic-php
+```
+
 ## How to use?
 
 Create anthropic client.
