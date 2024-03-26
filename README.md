@@ -15,6 +15,8 @@ composer require ahmadrosid/anthropic-php
 Create anthropic client.
 
 ```php
+use Anthropic\Anthropic;
+
 $headers = [
     'anthropic-version' => '2023-06-01',
     'anthropic-beta' => 'messages-2023-12-15',
@@ -34,6 +36,7 @@ Send chat message.
 ```php
 $model = 'claude-3-opus-20240229';
 $max_tokens = 4096;
+$temperature = 1;
 $systemMessage = 'Always reply with "Hello!"';
 $messages = [
     [
