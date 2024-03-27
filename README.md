@@ -36,7 +36,7 @@ Send chat message.
 ```php
 $model = 'claude-3-opus-20240229';
 $max_tokens = 4096;
-$temperature = 1;
+$temperature = 0;
 $systemMessage = 'Always reply with "Hello!"';
 $messages = [
     [
@@ -65,6 +65,7 @@ Process server sent event reply from chatbot.
 ```php
 $model = 'claude-3-opus-20240229';
 $max_tokens = 4096;
+$temperature = 0;
 $systemMessage = 'Always reply with "Hello!"';
 $messages = [
     [
