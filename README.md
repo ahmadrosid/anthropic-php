@@ -21,7 +21,7 @@ $headers = [
     'anthropic-version' => '2023-06-01',
     'anthropic-beta' => 'messages-2023-12-15',
     'content-type' => 'application/json',
-    'x-api-key' => env('ANTHROPIC_API_KEY')
+    'x-api-key' => env('ANTHROPIC_API_KEY', '')
 ];
 
 $client = Anthropic::factory()
