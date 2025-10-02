@@ -17,44 +17,41 @@ Create anthropic client.
 ```php
 use Anthropic\Anthropic;
 
-$headers = [
-    'anthropic-version' => '2023-06-01',
-    'anthropic-beta' => 'messages-2023-12-15',
-    'content-type' => 'application/json',
-    'x-api-key' => env('ANTHROPIC_API_KEY', '')
-];
-
 $client = Anthropic::factory()
-    ->withHeaders($headers)
+    ->withHeaders([
+        'anthropic-version' => '2023-06-01',  // Required!
+        'content-type' => 'application/json',
+        'x-api-key' => env('ANTHROPIC_API_KEY', '')
+    ])
     ->make();
 ```
+
+**Important:** The `anthropic-version` header is required. Without it, you'll get a 404 error.
+
+## Available Models
+
+- `claude-sonnet-4-5-20250929` - Latest and most intelligent model (best for coding)
+- `claude-3-opus-20240229` - Powerful model for complex tasks
+- `claude-3-haiku-20240307` - Fast and cost-effective model
 
 ## Chat with Claude
 
 Send chat message.
 
 ```php
-$model = 'claude-3-opus-20240229';
-$max_tokens = 4096;
-$temperature = 0;
-$systemMessage = 'Always reply with "Hello!"';
-$messages = [
-    [
-        'role' => 'user',
-        'content' => 'Hi there...'
-    ]
-];
-
 $response = $client->chat()->create([
-    'model' => $model,
-    'temperature' => $temperature,
-    'max_tokens' => $max_tokens,
-    'system' => $systemMessage,
-    'messages' => $messages,
+    'model' => 'claude-sonnet-4-5-20250929',
+    'max_tokens' => 4096,
+    'system' => 'You are a helpful assistant.',
+    'messages' => [
+        [
+            'role' => 'user',
+            'content' => 'Hello, how are you?'
+        ]
+    ]
 ]);
 
 $content = $response->choices[0]->message->content;
-
 echo $content;
 ```
 
@@ -86,6 +83,51 @@ foreach ($stream as $response) {
 
     echo $text;
 }
+```
+
+## Testing
+
+This package includes both unit tests and integration tests.
+
+### Running Unit Tests
+
+Unit tests use mocked HTTP clients and don't require an API key:
+
+```bash
+composer test
+```
+
+Or run only unit tests:
+
+```bash
+vendor/bin/phpunit --testsuite Unit
+```
+
+### Running Integration Tests
+
+Integration tests make real API calls to Anthropic. To run them:
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Add your Anthropic API key to `.env`:
+   ```
+   ANTHROPIC_API_KEY=your-api-key-here
+   ```
+
+3. Run integration tests:
+   ```bash
+   vendor/bin/phpunit --testsuite Integration
+   ```
+
+**Note:** Integration tests will consume API credits.
+
+### Running All Tests
+
+```bash
+vendor/bin/phpunit
 ```
 
 ## LICENSE

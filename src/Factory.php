@@ -43,6 +43,31 @@ class Factory
     }
 
     public function make() {
+        $this->validateHeaders();
         return new Client($this);
+    }
+
+    /**
+     * Validate that required headers are present.
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function validateHeaders(): void
+    {
+        if (empty($this->headers['anthropic-version'])) {
+            throw new \InvalidArgumentException(
+                'Missing required header: anthropic-version. ' .
+                'This header is required by the Anthropic API. ' .
+                'Use ->withHeader("anthropic-version", "2023-06-01") or include it in withHeaders().'
+            );
+        }
+
+        if (empty($this->headers['x-api-key'])) {
+            throw new \InvalidArgumentException(
+                'Missing required header: x-api-key. ' .
+                'You must provide your Anthropic API key. ' .
+                'Use ->withHeader("x-api-key", "your-api-key") or include it in withHeaders().'
+            );
+        }
     }
 }
