@@ -46,7 +46,7 @@ class ChatTest extends TestCase
             'id' => 'msg_123',
             'type' => 'message',
             'role' => 'assistant',
-            'model' => 'claude-3-opus-20240229',
+            'model' => 'claude-opus-4-7',
             'stop_reason' => 'end_turn',
             'stop_sequence' => null,
             'content' => [
@@ -78,7 +78,7 @@ class ChatTest extends TestCase
         $property->setValue($chat, $mockGuzzle);
 
         $response = $chat->create([
-            'model' => 'claude-3-opus-20240229',
+            'model' => 'claude-opus-4-7',
             'max_tokens' => 1024,
             'messages' => [
                 ['role' => 'user', 'content' => 'Hello']
@@ -114,7 +114,7 @@ class ChatTest extends TestCase
         $this->expectExceptionMessage('Invalid API key');
 
         $chat->create([
-            'model' => 'claude-3-opus-20240229',
+            'model' => 'claude-opus-4-7',
             'max_tokens' => 1024,
             'messages' => [['role' => 'user', 'content' => 'Hello']]
         ]);
@@ -140,7 +140,7 @@ class ChatTest extends TestCase
         $property->setValue($chat, $mockGuzzle);
 
         $response = $chat->createStreamed([
-            'model' => 'claude-3-opus-20240229',
+            'model' => 'claude-opus-4-7',
             'max_tokens' => 1024,
             'messages' => [['role' => 'user', 'content' => 'Hello']]
         ]);

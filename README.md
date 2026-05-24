@@ -30,9 +30,38 @@ $client = Anthropic::factory()
 
 ## Available Models
 
-- `claude-sonnet-4-5-20250929` - Latest and most intelligent model (best for coding)
-- `claude-3-opus-20240229` - Powerful model for complex tasks
-- `claude-3-haiku-20240307` - Fast and cost-effective model
+### Latest Models
+
+| Model | API ID | Description |
+|-------|--------|-------------|
+| Claude Opus 4.7 | `claude-opus-4-7` | Most capable model for complex reasoning and agentic coding |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` | Best combination of speed and intelligence |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Fastest model with near-frontier intelligence |
+
+### Previous Generation (still available)
+
+| Model | API ID |
+|-------|--------|
+| Claude Opus 4.6 | `claude-opus-4-6` |
+| Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` |
+| Claude Opus 4.5 | `claude-opus-4-5-20251101` |
+| Claude Opus 4.1 | `claude-opus-4-1-20250805` |
+
+### Using Model Constants
+
+You can use the `Model` class for convenient access to model identifiers:
+
+```php
+use Anthropic\Model;
+
+$response = $client->chat()->create([
+    'model' => Model::CLAUDE_OPUS_4_7,
+    'max_tokens' => 4096,
+    'messages' => [
+        ['role' => 'user', 'content' => 'Hello!']
+    ]
+]);
+```
 
 ## Chat with Claude
 
@@ -40,7 +69,7 @@ Send chat message.
 
 ```php
 $response = $client->chat()->create([
-    'model' => 'claude-sonnet-4-5-20250929',
+    'model' => 'claude-opus-4-7',
     'max_tokens' => 4096,
     'system' => 'You are a helpful assistant.',
     'messages' => [
@@ -60,7 +89,7 @@ echo $content;
 Process server sent event reply from chatbot.
 
 ```php
-$model = 'claude-3-opus-20240229';
+$model = 'claude-sonnet-4-6';
 $max_tokens = 4096;
 $temperature = 0;
 $systemMessage = 'Always reply with "Hello!"';

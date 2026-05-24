@@ -25,7 +25,7 @@ class Chat {
     /**
      * Example payload
      * [
-     *      'model' => 'claude-3-opus-20240229',
+     *      'model' => 'claude-opus-4-7',
      *      'temperature' => $temperature,
      *      'max_tokens' => 1024,
      *      'system' => $systemMessage,
@@ -53,7 +53,7 @@ class Chat {
     /**
      * Example payload
      * [
-     *      'model' => 'claude-3-opus-20240229',
+     *      'model' => 'claude-opus-4-7',
      *      'messages' => $messages,
      *      'max_tokens' => 1024,
      *      'stream' => true
